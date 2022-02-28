@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basic</title>
+</head>
+<body>
+    <!-- 对象 -->
+    <div>{{page.title}}</div>
+
+    <!-- 标记 -->
+    {% if user %}
+    hello {{page.title}}!
+    {% endif user %}
+
+    <!-- 过滤器 -->
+    {{ "/basic/index.liquid" | append: '.html'}}
+
+    <!-- assign capture 标记初始化变量 -->
+    {% assign string = "hello world" %}
+    {% assign int = 25 %} 
+    {% assign float = 39.999 %}
+
+    <!-- 对象类型 String Number Boolean Nil Array -->
+    {% assign foo = true %}
+    {% assign string = "hello world" %}
+    {% assign int = 25 %} 
+    {% assign float = 39.999 %}
+    {% if user %}
+        Hello {{user.name}}
+    {% endif %}
+    <!-- if site.users = "Tobi", "Laura", "Tetsuro", "Adam" -->
+    {% for user in site.users %}
+        {{user}}
+    {% endfor %}
+
+    <!-- if site.users = "Tobi", "Laura", "Tetsuro", "Adam" -->
+    {{ site.users[0] }} 
+    {{ site.users[1 ]}}
+
+</body>
+
+<script>
+    let page = {
+        title: "denise"
+    }
+</script>
+</html>
+
