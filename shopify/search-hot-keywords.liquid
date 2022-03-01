@@ -1,0 +1,85 @@
+<!-- 魔改 modify 自定义热门搜索关键字 -->
+<div class="hot-keyword">
+    <div class="title">
+      Trending
+    </div>
+    <ul id="keyword-list">
+      <li>corset</li>
+      <li>dress</li>
+      <li>skirt</li>
+      <li>pants</li>
+      <li>bustier</li>
+      <li>jeans</li>
+      <li>top</li>
+    </ul>
+    <style>
+      .hot-keyword .title {
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      #keyword-list {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      #keyword-list li {
+        cursor: pointer;
+        font-size: 16px;
+        margin-right: 20px;
+        padding: 10px ;
+        letter-spacing: 1px;
+        color: #666;
+        background-color: #f6f6f6;
+        margin-bottom: 20px;
+        text-transform: capitalize;
+      }
+      #keyword-list li:first-of-type,
+      #keyword-list li:nth-of-type(2),
+      #keyword-list li:nth-of-type(3) {
+        /* color: #fa6338; */
+      }
+      #keyword-list li:first-of-type::before,
+      #keyword-list li:nth-of-type(2)::before,
+      #keyword-list li:nth-of-type(3)::before {
+        content: "·";
+        color: #fa6338;
+        font-weight: bold;
+        font-size: 20px;
+        margin-right: 2px;
+      }
+    </style>
+    <script>
+      function callback(mutationList, observer) {
+        mutationList.forEach((mutation) => {
+          // console.log('监听类型', mutation)
+          if (mutation.type === 'attributes' && mutation.oldValue.split(' ').includes('slideout--active')) {
+            let list = document.getElementById('keyword-list')
+            if(list) {
+              list.addEventListener('click', function(e) {
+                if(e.target.nodeName === 'LI') {
+                  // document.getElementById('searchbox-').value = e.target.innerText
+                  window.open(`/search?q=${e.target.innerText}&submit=Search&options%5Bprefix%5D=last`)
+                }
+              })
+            }
+          }
+        })
+      }
+      let findDOM = false
+      let handleFindDom = setInterval(function() {
+        if(findDOM) {
+          return clearInterval(handleFindDom)
+        }else {
+          findDOM = true
+          let targetDOM = document.getElementById('slideout-search-sidebar')
+          // console.log('find search side =>', targetDOM)
+          var observer = new MutationObserver(callback)
+          observer.observe(targetDOM, {
+            attributeOldValue: true
+          })
+        }
+      }, 1600)
+    </script>
+  </div>
