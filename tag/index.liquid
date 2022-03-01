@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tag</title>
+</head>
+<body>
+    <!-- 注释 -->
+    {% comment %} and {% endcomment %}
+
+    <!-- 控制流 -->
+    <!-- 只有当某个条件为true执行 -->
+    {% if product.title == 'awesome shoe' %}
+        my name is xxp
+    {% endif %}
+
+    <!-- 与if相对-当某个条件不成立时执行 -->
+    {% unless condition %}
+    {% endunless %}
+
+    <!-- 为if和unless添加更多状态判断 -->
+    {% if condition %}
+    {% elsif %}
+    {% else %}
+    {% endif %}
+    
+    <!-- 创建一个开关表达式，将一个变量和多个不同值比较
+    case用于初始化一个开关表达式，when用于比较值 -->
+    {% assign handle = 'cake' %}
+    {% case handle %}
+    {% when 'cake' %}
+     This is a cake
+    {% when 'cookie' %}
+     This is a cookie
+    {% else %}
+     This is not a cake nor a cookie
+    {% endcase %}
+
+    <!-- 控制流 -->
+    {% for name in collection %}
+        {{name.title}}
+    {% endfor %}
+
+    {% for i in (1..5) %}
+        {% if i==4 %}
+            {% break %}
+        {% else %}    
+            {{i}}
+        {% endif %}
+    {% endfor %}
+
+    {% for i in (1..5) %}
+        {% if i == 4 %}
+            {% continue %}
+        {% else %}
+            {{i}}
+        {% endif %}
+    {% endfor %}
+        
+    <!-- if array = [1,2,3,4,5,6] -->
+    <!-- limit：限定循环执行次数 -->
+    {% for item in array limit:2 %}
+        {{ item }}
+    {% endfor %}
+
+    <!-- if array = [1,2,3,4,5,6] -->
+    <!-- offset： 从指定索引开始执行循环 -->
+    {% for item in array offset:2 %}
+        {{ item }}
+    {% endfor %}
+
+    <!-- range：定义循环执行范围 -->
+    {% for i in (3..5) %}
+        {{ i }}
+    {% endfor %}
+    {% assign num = 4 %}
+    {% for i in (1..num) %}
+        {{ i }}
+    {% endfor %}
+
+    <!-- if array = [1,2,3,4,5,6] -->
+    <!-- reversed：反转循环的执行顺序 -->
+    {% for item in array reversed %}
+        {{ item }}
+    {% endfor %}
+
+    <!-- tablerow:生成一个HTML表格
+    cols:定义表格有多少列 -->
+    <table>
+        {% tablerow item in collection cols: 2 %}
+            {{item}}
+        {% endtablerow %}
+    </table>
+
+    <!-- raw标记临时禁止处理其所包围的代码 -->
+    {% raw %}
+        in this,{{this}} not deal
+    {% endraw %}
+
+    <!-- assign：创建新变量 -->
+    {% assign variable = false %}
+
+    <!-- 将capture开始与结束之间的字符串捕获之后赋值给一个变量
+    通过{% capture %}创建的都是字符串 -->
+    {% capture variable %}
+        i am xxp
+    {% endcapture %}
+
+    <!-- increment:创建一个全新的数值变量，后续每次调用加1
+    decrement：与increment相反，减1 -->
+    {% increment counter %}
+
+
+
+</body>
+</html>
